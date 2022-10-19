@@ -23,7 +23,10 @@
 	"types": "dist/index.d.ts",
 	"dependencies": {
 		"@strumenta/tylasu": "^1.1.4",
-		"antlr4ts": "^0.5.0-alpha.4"
+		"antlr4ts": "^0.5.0-alpha.4",
+		"assert": "^2.0.0",
+		"process": "^0.11.10",
+		"util": "^0.12.3"
 	},
 	"devDependencies": {
 		"@tsconfig/recommended": "^1.0.1",
@@ -34,17 +37,24 @@
 		"@typescript-eslint/parser": "^4.11.0",
 		"antlr4ts-cli": "^0.5.0-alpha.4",
 		"chai": "^4.2.0",
+		"cross-env": "^7.0.3",
 		"eslint": "^7.16.0",
 		"merge-options": "^2.0.0",
 		"mocha": "^6.2.2",
 		"rimraf": "^3.0.0",
+		"source-map-loader": "^4.0.1",
 		"ts-loader": "^6.2.2",
 		"ts-node": "^8.8.2",
-		"typescript": "^3.8.3"
+		"typescript": "^3.8.3",
+		"webpack": "^5.74.0",
+		"webpack-cli": "^4.10.0"
 	},
 	"scripts": {
 		"clean": "rimraf dist && rimraf strumenta-sql-parser-v*.tgz",
-		"build": "yarn run build-parser && tsc",
+		"build": "yarn run build-parser && yarn run build:browser && yarn run build:esm && yarn run build:cjs",
+		"build:browser": "cross-env NODE_ENV=production webpack",
+		"build:cjs": "tsc --module commonjs --outDir dist/cjs",
+		"build:esm": "tsc --module es6 --outDir dist/esm",
 		"build-parser": "antlr4ts -o src/parser -Xexact-output-dir -visitor src/grammar/SimpleLangLexer.g4 src/grammar/SimpleLangParser.g4",
 		"lint": "eslint src",
 		"test": "mocha -r ts-node/register tests/**/*.test.ts",		

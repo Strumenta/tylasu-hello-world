@@ -3,6 +3,7 @@
 	"compilerOptions": {
         "experimentalDecorators": true,
 		"esModuleInterop": true,
+		"moduleResolution": "node",
 		"declaration": true,
 		"sourceMap": true,
 		"strict": false,
