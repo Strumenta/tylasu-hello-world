@@ -20,6 +20,6 @@ export class SLParser extends Parser<CompilationUnit, SimpleLangParser, Compilat
     protected parseTreeToAst(
         parseTreeRoot: CompilationUnitContext, considerPosition: boolean, issues: Issue[]
     ): CompilationUnit | undefined {
-        return new CompilationUnit().withParseTreeNode(parseTreeRoot);
+        return new CompilationUnit().withParseTreeNode(parseTreeRoot); // TODO: build a more comprehensive AST
     }
 }

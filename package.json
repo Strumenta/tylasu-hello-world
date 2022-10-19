@@ -47,18 +47,15 @@
 		"ts-node": "^8.8.2",
 		"typescript": "^3.8.3",
 		"webpack": "^5.74.0",
-		"webpack-cli": "^4.10.0"
+		"webpack-cli": "^4.10.0",
+		"yarn-or-npm": "^3.0.1"
 	},
 	"scripts": {
-		"clean": "rimraf dist && rimraf strumenta-sql-parser-v*.tgz",
-		"build": "yarn run build-parser && yarn run build:browser && yarn run build:esm && yarn run build:cjs",
+		"clean": "rimraf dist && rimraf *.tgz",
+		"build": "yarn-or-npm run gen:parser && yarn-or-npm run build:browser && yarn-or-npm run build:esm && yarn-or-npm run build:cjs",
 		"build:browser": "cross-env NODE_ENV=production webpack",
 		"build:cjs": "tsc --module commonjs --outDir dist/cjs",
 		"build:esm": "tsc --module es6 --outDir dist/esm",
-		"build-parser": "antlr4ts -o src/parser -Xexact-output-dir -visitor src/grammar/SimpleLangLexer.g4 src/grammar/SimpleLangParser.g4",
-		"lint": "eslint src",
-		"test": "mocha -r ts-node/register tests/**/*.test.ts",		
-		"prepare-dist": "cp package.json dist && cp -r src/* dist && rimraf dist/grammar/gen",
-		"dist": "yarn run clean && yarn run lint && yarn run build && yarn run test && yarn pack"
+		"gen:parser": "antlr4ts -o src/parser -Xexact-output-dir -visitor src/grammar/SimpleLangLexer.g4 src/grammar/SimpleLangParser.g4"
 	}
 }
