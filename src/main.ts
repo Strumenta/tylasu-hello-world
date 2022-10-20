@@ -1,4 +1,9 @@
-import {SLParser} from "./parser";
+import {CompilationUnit, SetStatement, SLParser} from "./parser";
+import {getNodeDefinition} from "@strumenta/tylasu";
+
+console.log("Node definition for CompilationUnit", getNodeDefinition(CompilationUnit));
+console.log("Node definition for SetStatement", getNodeDefinition(SetStatement));
+
 
 const code = "set foo = 123";
 console.log(`Parsing "${code}"...`);

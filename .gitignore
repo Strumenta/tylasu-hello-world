@@ -1,5 +1,6 @@
 .idea/
 dist/
+gen/
 node_modules/
 src/grammar/gen/
 src/parser/

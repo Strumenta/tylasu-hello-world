@@ -118,10 +118,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@strumenta/tylasu@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@strumenta/tylasu/-/tylasu-1.1.4.tgz#ffb4b45b1c38fc885f0b24f61cfe9c14357643bb"
-  integrity sha512-AroyzMDofY10avaQfosIUa7vfqMSr232ssZYshZkKYqlaFfAI5EELbHdDcrZ/TP0oMy+MENC07r0cou64KBr/w==
+"@strumenta/tylasu@^1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@strumenta/tylasu/-/tylasu-1.1.6.tgz#568a2c5a333a8818fc609f742f6cd40e7365302e"
+  integrity sha512-IY78AWfWNlr2q4eiPn3hwfo8aSErpjLRCLrK3U7ZCW88SBfPZVrFm9NcRB38Lc8Aomf87AVCSVsC94xu+UdFpg==
   dependencies:
     iter-ops "^1.5.0"
     reflect-metadata "^0.1.13"
