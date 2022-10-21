@@ -11,14 +11,14 @@ statement:
     ;
 
 expression:
-      INT_LIT
-    | DEC_LIT
-    | STRING_LIT
-    | BOOLEAN_LIT
-    | expression PLUS expression
-    | expression MINUS expression
-    | expression MULT expression
-    | expression DIV expression
+      INT_LIT                       #literalExpr
+    | DEC_LIT                       #literalExpr
+    | STRING_LIT                    #literalExpr
+    | BOOLEAN_LIT                   #literalExpr
+    | left=expression PLUS right=expression    #binaryExpr
+    | left=expression MINUS right=expression   #binaryExpr
+    | left=expression MULT right=expression    #binaryExpr
+    | left=expression DIV right=expression     #binaryExpr
     ;
 
 type:

@@ -3,11 +3,17 @@ import {Parser} from "@strumenta/tylasu/parsing";
 import {SimpleLangLexer} from "./parser/SimpleLangLexer";
 import {Lexer} from "antlr4ts/Lexer";
 import {CharStream} from "antlr4ts/CharStream";
-import {CompilationUnitContext, SetStmtContext, SimpleLangParser} from "./parser/SimpleLangParser";
+import {
+    BinaryExprContext,
+    CompilationUnitContext,
+    ExpressionContext,
+    LiteralExprContext,
+    SetStmtContext,
+    SimpleLangParser
+} from "./parser/SimpleLangParser";
 import {TokenStream} from "antlr4ts/TokenStream";
 
 export class CompilationUnit extends Node {
-    // TODO statements: @Child/@Children + @Mapped("propertyName") se il nome nel parse tree è diverso dal nome nell'ast (es. statement/statementS, sqlStatement -> statement)
     @Children()
     @Mapped("statement")
     statements: Statement[];
@@ -17,22 +23,78 @@ export abstract class Statement extends Node {}
 
 export class SetStatement extends Statement {
     @Property() variable: string;
-    //TODO expression (@Child)
+    @Child() expression: Expression;
 
     constructor(variable: string) {
         super();
         this.variable = variable;
     }
+}
 
-    @Init
-    initNode() {
-        console.log("Creating node to set variable " + this.variable);
+export abstract class Type extends Node {}
+export class IntegerType extends Type {}
+export class DecimalType extends Type {}
+export class StringType extends Type {}
+export class BooleanType extends Type {}
+
+export abstract class Operator extends Node {}
+export abstract class BinaryOperator extends Operator {}
+export class SumOperator extends BinaryOperator {}
+export class SubtractionOperator extends BinaryOperator {}
+export class MultiplicationOperator extends BinaryOperator {}
+export class DivisionOperator extends BinaryOperator {}
+
+export abstract class Expression extends Node {
+    @Property() type: Type;
+}
+
+export class LiteralExpression extends Expression {
+    @Property() value: string;
+
+    constructor(value: string, type: Type) {
+        super();
+        this.value = value;
+        this.type = type;
+    }
+}
+
+export class BinaryExpression extends Expression {
+    @Property() operator: BinaryOperator;
+    @Child() left: Expression;
+    @Child() right: Expression;
+
+    constructor(operator: BinaryOperator) {
+        super();
+        this.operator = operator;
     }
 }
 
 registerNodeFactory(CompilationUnitContext, () => { return new CompilationUnit(); });
+
 registerNodeFactory(SetStmtContext, (setStmt: SetStmtContext) => {
     return new SetStatement(setStmt.ID().text);
+});
+
+registerNodeFactory(LiteralExprContext, (literalExpression: LiteralExprContext) => {
+    let type;
+
+    if (literalExpression.INT_LIT() != null) type = new IntegerType();
+    if (literalExpression.DEC_LIT() != null) type = new DecimalType();
+    if (literalExpression.STRING_LIT() != null) type = new StringType();
+    if (literalExpression.BOOLEAN_LIT() != null) type = new BooleanType();
+
+   return new LiteralExpression(literalExpression.text, type);
+});
+
+registerNodeFactory(BinaryExprContext, (binaryExpression: BinaryExprContext) => {
+    let operator;
+
+    if (binaryExpression.PLUS() != null) operator = new SumOperator();
+    if (binaryExpression.PLUS() != null) operator = new SumOperator();
+    if (binaryExpression.PLUS() != null) operator = new SumOperator();
+    if (binaryExpression.PLUS() != null) operator = new SumOperator();
+
+    return new BinaryExpression(operator);
 });
 
 export class SLParser extends Parser<CompilationUnit, SimpleLangParser, CompilationUnitContext> {
