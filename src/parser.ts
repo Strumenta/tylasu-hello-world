@@ -37,7 +37,7 @@ export class DecimalType extends Type {}
 export class StringType extends Type {}
 export class BooleanType extends Type {}
 
-export abstract class Operator extends Node {}
+export abstract class Operator {}
 export abstract class BinaryOperator extends Operator {}
 export class SumOperator extends BinaryOperator {}
 export class SubtractionOperator extends BinaryOperator {}
