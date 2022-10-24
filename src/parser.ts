@@ -90,9 +90,9 @@ registerNodeFactory(BinaryExprContext, (binaryExpression: BinaryExprContext) => 
     let operator;
 
     if (binaryExpression.PLUS() != null) operator = new SumOperator();
-    if (binaryExpression.PLUS() != null) operator = new SumOperator();
-    if (binaryExpression.PLUS() != null) operator = new SumOperator();
-    if (binaryExpression.PLUS() != null) operator = new SumOperator();
+    if (binaryExpression.MINUS() != null) operator = new SubtractionOperator();
+    if (binaryExpression.MULT() != null) operator = new MultiplicationOperator();
+    if (binaryExpression.DIV() != null) operator = new DivisionOperator();
 
     return new BinaryExpression(operator);
 });
