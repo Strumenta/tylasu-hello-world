@@ -5,7 +5,9 @@ console.log("Node definition for CompilationUnit", getNodeDefinition(Compilation
 console.log("Node definition for SetStatement", getNodeDefinition(SetStatement));
 
 
-const code = "set foo = 123";
+const code = `set foo = 123
+set goo = "aloha"
+set sum = 5 + 10`;
 console.log(`Parsing "${code}"...`);
 const parser = new SLParser();
 const result = parser.parse(code);

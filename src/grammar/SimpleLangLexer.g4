@@ -25,7 +25,7 @@ BOOLEAN : 'boolean' ;
 
 INT_LIT : [0-9]+ ;
 DEC_LIT : [0-9]+ '.' [0-9]+ ;
-STRING_LIT : '"' '"' ;
+STRING_LIT : '"' ~["]* '"' ;
 BOOLEAN_LIT : 'false' | 'true' ;
 
 ID : [a-zA-Z][a-zA-Z_0-9]* ;
