@@ -60,8 +60,8 @@ export class LiteralExpression extends Expression {
 
 export class BinaryExpression extends Expression {
     @Property() operator: BinaryOperator;
-    @Child() left: Expression;
-    @Child() right: Expression;
+    @Child() @Mapped("_left") left: Expression;
+    @Child() @Mapped("_right") right: Expression;
 
     constructor(operator: BinaryOperator) {
         super();
