@@ -3,7 +3,7 @@
 	"description": "Hello World with Tylasu and ANTLR4.",
 	"author": "Strumenta s.r.l.",
 	"publisher": "strumenta",
-	"version": "0.1.0",
+	"version": "1.2.1",
 	"license": "Apache 2.0",
 	"repository": {
 		"type": "git",
@@ -22,7 +22,7 @@
 	"module": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"dependencies": {
-		"@strumenta/tylasu": "^1.1.6",
+		"@strumenta/tylasu": "^1.2.1",
 		"antlr4ts": "^0.5.0-alpha.4",
 		"assert": "^2.0.0",
 		"process": "^0.11.10",
