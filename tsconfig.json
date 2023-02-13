@@ -7,8 +7,9 @@
 		"declaration": true,
 		"sourceMap": true,
 		"strict": false,
+		"strictNullChecks": true,
 		"outDir": "dist"
 	},
-	"include": ["src/main.ts"],
+	"include": ["src/main.ts", "src/java-parser-test.ts"],
 	"exclude": ["node_modules"]
 }
